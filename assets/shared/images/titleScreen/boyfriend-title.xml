@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="boyfriend-title.png">
+	<!-- Created with Adobe Animate version 22.0.5.191 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="boyfriend title0000" x="12" y="12" width="180" height="205" frameX="0" frameY="-1" frameWidth="180" frameHeight="206"/>
+	<SubTexture name="boyfriend title0001" x="12" y="12" width="180" height="205" frameX="0" frameY="-1" frameWidth="180" frameHeight="206"/>
+	<SubTexture name="boyfriend title0002" x="204" y="12" width="180" height="205" frameX="0" frameY="-1" frameWidth="180" frameHeight="206"/>
+	<SubTexture name="boyfriend title0003" x="204" y="12" width="180" height="205" frameX="0" frameY="-1" frameWidth="180" frameHeight="206"/>
+	<SubTexture name="boyfriend title0004" x="396" y="12" width="180" height="206"/>
+	<SubTexture name="boyfriend title0005" x="396" y="12" width="180" height="206"/>
+	<SubTexture name="boyfriend title0006" x="12" y="230" width="180" height="206"/>
+	<SubTexture name="boyfriend title0007" x="12" y="230" width="180" height="206"/>
+	<SubTexture name="boyfriend title0008" x="204" y="230" width="180" height="206"/>
+	<SubTexture name="boyfriend title0009" x="204" y="230" width="180" height="206"/>
+	<SubTexture name="boyfriend title0010" x="204" y="230" width="180" height="206"/>
+	<SubTexture name="boyfriend title0011" x="204" y="230" width="180" height="206"/>
+	<SubTexture name="boyfriend title0012" x="204" y="230" width="180" height="206"/>
+	<SubTexture name="boyfriend title0013" x="204" y="230" width="180" height="206"/>
+</TextureAtlas>

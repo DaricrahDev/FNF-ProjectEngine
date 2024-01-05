@@ -1,0 +1,46 @@
+{
+	"people": [
+		"DaricrahDev",
+		"QC",
+		"FoxLOID",
+		"Da\nTaurenado",
+		"Barbara\nOficial"
+	],
+	"descriptions": [
+		"Main programmer, coded all of the features. I work on a lot of FNF Mods, i make cool stuff.",
+		"A great person that helped me making this engine, gave me ideas and made cool art for the logo! Thank you so much!",
+		"Made most of the textures you can see on the engine",
+		"\n\nHello im an artist for this mod! nuh idk what to put here except im usually bored and i like to play games so if you want to play some games, hit me up",
+		"\n\nJust a programmer who programs on a cell phone."
+	],
+	"links": [
+		"https://www.youtube.com/channel/UCIN9kMpVu9cFj0RIJ8NXDow",
+		"https://twitter.com/WVN84954413",
+		"https://twitter.com/FoxLOID_",
+		"null",
+		"https://twitter.com/Barbara_Origami"
+	],
+	"badgeImages": [
+		"bios/badge4",
+	 	"bios/badge1", 
+	 	"bios/badge4", 
+	 	"bios/badge2", 
+		"bios/badge1"
+	],
+	"imageLinks": [
+		"bios/mainDevs/daricrahdev",
+		"bios/noBiosImg",
+		"bios/mainDevs/foxloid",
+		"bios/mainDevs/dataurenado",
+		"bios/mainDevs/barbaraOficial"
+	],
+	"badgeText": [
+		"Main Programmer",
+		"UI Artist",
+		"Main Artist",
+		"Artist",
+		"Programmer"
+	],
+	"backgroundSprite": "menuDesat",
+	"backgroundColor": ["FDE871", "444444", "3EAEFF", "00FF66", "EE1655"]
+}

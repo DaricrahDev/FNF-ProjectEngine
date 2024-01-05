@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="girlfriend-title.png">
+	<!-- Created with Adobe Animate version 22.0.5.191 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="girlfriend title0000" x="12" y="12" width="202" height="205" frameX="0" frameY="-1" frameWidth="202" frameHeight="206"/>
+	<SubTexture name="girlfriend title0001" x="12" y="12" width="202" height="205" frameX="0" frameY="-1" frameWidth="202" frameHeight="206"/>
+	<SubTexture name="girlfriend title0002" x="226" y="12" width="202" height="206"/>
+	<SubTexture name="girlfriend title0003" x="440" y="12" width="202" height="206"/>
+	<SubTexture name="girlfriend title0004" x="654" y="12" width="202" height="206"/>
+	<SubTexture name="girlfriend title0005" x="868" y="12" width="202" height="206"/>
+	<SubTexture name="girlfriend title0006" x="868" y="12" width="202" height="206"/>
+	<SubTexture name="girlfriend title0007" x="1082" y="12" width="202" height="206"/>
+	<SubTexture name="girlfriend title0008" x="1082" y="12" width="202" height="206"/>
+	<SubTexture name="girlfriend title0009" x="12" y="230" width="202" height="206"/>
+	<SubTexture name="girlfriend title0010" x="12" y="230" width="202" height="206"/>
+	<SubTexture name="girlfriend title0011" x="226" y="230" width="202" height="206"/>
+	<SubTexture name="girlfriend title0012" x="226" y="230" width="202" height="206"/>
+	<SubTexture name="girlfriend title0013" x="440" y="230" width="202" height="206"/>
+	<SubTexture name="girlfriend title0014" x="440" y="230" width="202" height="206"/>
+	<SubTexture name="girlfriend title0015" x="654" y="230" width="202" height="206"/>
+	<SubTexture name="girlfriend title0016" x="654" y="230" width="202" height="206"/>
+	<SubTexture name="girlfriend title0017" x="868" y="230" width="202" height="206"/>
+	<SubTexture name="girlfriend title0018" x="1082" y="230" width="202" height="206"/>
+	<SubTexture name="girlfriend title0019" x="12" y="448" width="202" height="206"/>
+	<SubTexture name="girlfriend title0020" x="226" y="448" width="202" height="206"/>
+	<SubTexture name="girlfriend title0021" x="226" y="448" width="202" height="206"/>
+	<SubTexture name="girlfriend title0022" x="440" y="448" width="202" height="206"/>
+	<SubTexture name="girlfriend title0023" x="440" y="448" width="202" height="206"/>
+	<SubTexture name="girlfriend title0024" x="654" y="448" width="202" height="206"/>
+	<SubTexture name="girlfriend title0025" x="654" y="448" width="202" height="206"/>
+	<SubTexture name="girlfriend title0026" x="868" y="448" width="202" height="206"/>
+	<SubTexture name="girlfriend title0027" x="868" y="448" width="202" height="206"/>
+	<SubTexture name="girlfriend title0028" x="1082" y="448" width="202" height="206"/>
+	<SubTexture name="girlfriend title0029" x="1082" y="448" width="202" height="206"/>
+</TextureAtlas>

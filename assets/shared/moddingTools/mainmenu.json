@@ -1,0 +1,14 @@
+{
+	"creditsType": "Bios",
+	"oneshotSongName": "Bopeebo",
+	"backgroundColor": "0xff7e0097",
+	"backgroundSpr": "menuDesat",
+	"checkersEnabled": true,
+	"randomMessage": [
+	"Welcome to PE v0.7.2!",
+	"Try the new Menu Editor by pressing TAB", 
+	"Take a look to the new options menu design!",
+	"Fun fact: Psych's version is 0.7.2, same with Project Engine",
+	"Stage Editor is never going to be released. /j"
+	]	
+}
