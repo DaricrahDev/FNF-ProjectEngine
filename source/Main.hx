@@ -28,7 +28,9 @@ import openfl.events.UncaughtErrorEvent;
 import haxe.CallStack;
 import haxe.io.Path;
 #end
-
+#if hl
+import hl.Api;
+#end
 #if linux
 @:cppInclude('./external/gamemode_client.h')
 @:cppFileCode('
