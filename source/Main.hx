@@ -1,6 +1,5 @@
 package;
 
-
 import debug.FPSCounter;
 
 import flixel.graphics.FlxGraphic;
