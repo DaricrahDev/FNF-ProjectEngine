@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="press_enter.png">
+	<!-- Created with Adobe Animate version 20.5.0.29329 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="enter pressed0000" x="0" y="0" width="1477" height="79" frameX="0" frameY="0" frameWidth="1477" frameHeight="131"/>
+	<SubTexture name="enter pressed0001" x="1477" y="0" width="1477" height="79" frameX="0" frameY="0" frameWidth="1477" frameHeight="131"/>
+	<SubTexture name="enter pressed0002" x="0" y="0" width="1477" height="79" frameX="0" frameY="0" frameWidth="1477" frameHeight="131"/>
+	<SubTexture name="enter pressed0003" x="1477" y="0" width="1477" height="79" frameX="0" frameY="0" frameWidth="1477" frameHeight="131"/>
+	<SubTexture name="enter pressed0004" x="0" y="0" width="1477" height="79" frameX="0" frameY="0" frameWidth="1477" frameHeight="131"/>
+	<SubTexture name="enter pressed0005" x="1477" y="0" width="1477" height="79" frameX="0" frameY="0" frameWidth="1477" frameHeight="131"/>
+	<SubTexture name="enter pressed0006" x="1477" y="0" width="1477" height="79" frameX="0" frameY="0" frameWidth="1477" frameHeight="131"/>
+	<SubTexture name="enter pressed0007" x="0" y="0" width="1477" height="79" frameX="0" frameY="0" frameWidth="1477" frameHeight="131"/>
+	<SubTexture name="enter pressed0008" x="1477" y="0" width="1477" height="79" frameX="0" frameY="0" frameWidth="1477" frameHeight="131"/>
+	<SubTexture name="press enter0000" x="0" y="79" width="1495" height="96"/>
+	<SubTexture name="press enter0001" x="1495" y="79" width="1495" height="96"/>
+	<SubTexture name="press enter0002" x="0" y="175" width="1495" height="96"/>
+	<SubTexture name="press enter0003" x="1495" y="175" width="1495" height="96"/>
+	<SubTexture name="press enter0004" x="0" y="271" width="1495" height="96"/>
+	<SubTexture name="press enter0005" x="1495" y="271" width="1495" height="96"/>
+	<SubTexture name="press enter0006" x="0" y="367" width="1495" height="96"/>
+	<SubTexture name="press enter0007" x="1495" y="367" width="1495" height="96"/>
+	<SubTexture name="press enter0008" x="0" y="463" width="1495" height="96"/>
+	<SubTexture name="press enter0009" x="1495" y="463" width="1495" height="96"/>
+	<SubTexture name="press enter0010" x="0" y="559" width="1495" height="96"/>
+	<SubTexture name="press enter0011" x="1495" y="559" width="1495" height="96"/>
+	<SubTexture name="press enter0012" x="0" y="655" width="1495" height="96"/>
+	<SubTexture name="press enter0013" x="1495" y="655" width="1495" height="96"/>
+	<SubTexture name="press enter0014" x="0" y="751" width="1495" height="96"/>
+	<SubTexture name="press enter0015" x="1495" y="751" width="1495" height="96"/>
+	<SubTexture name="press enter0016" x="0" y="847" width="1495" height="96"/>
+	<SubTexture name="press enter0017" x="1495" y="847" width="1495" height="96"/>
+	<SubTexture name="press enter0018" x="0" y="943" width="1495" height="96"/>
+	<SubTexture name="press enter0019" x="1495" y="943" width="1495" height="96"/>
+	<SubTexture name="press enter0020" x="0" y="1039" width="1495" height="96"/>
+	<SubTexture name="press enter0021" x="1495" y="1039" width="1495" height="96"/>
+	<SubTexture name="press enter0022" x="0" y="1135" width="1495" height="96"/>
+	<SubTexture name="press enter0023" x="0" y="1135" width="1495" height="96"/>
+	<SubTexture name="press enter0024" x="1495" y="1135" width="1495" height="96"/>
+	<SubTexture name="press enter0025" x="0" y="1039" width="1495" height="96"/>
+	<SubTexture name="press enter0026" x="0" y="1231" width="1495" height="96"/>
+	<SubTexture name="press enter0027" x="1495" y="1231" width="1495" height="96"/>
+	<SubTexture name="press enter0028" x="0" y="1327" width="1495" height="96"/>
+	<SubTexture name="press enter0029" x="1495" y="1327" width="1495" height="96"/>
+	<SubTexture name="press enter0030" x="0" y="1423" width="1495" height="96"/>
+	<SubTexture name="press enter0031" x="1495" y="1423" width="1495" height="96"/>
+	<SubTexture name="press enter0032" x="0" y="1519" width="1495" height="96"/>
+	<SubTexture name="press enter0033" x="1495" y="1519" width="1495" height="96"/>
+	<SubTexture name="press enter0034" x="0" y="1615" width="1495" height="96"/>
+	<SubTexture name="press enter0035" x="1495" y="1615" width="1495" height="96"/>
+	<SubTexture name="press enter0036" x="0" y="1711" width="1495" height="96"/>
+	<SubTexture name="press enter0037" x="1495" y="1711" width="1495" height="96"/>
+	<SubTexture name="press enter0038" x="0" y="1807" width="1495" height="96"/>
+	<SubTexture name="press enter0039" x="1495" y="1807" width="1495" height="96"/>
+	<SubTexture name="press enter0040" x="0" y="1903" width="1495" height="96"/>
+	<SubTexture name="press enter0041" x="1495" y="1903" width="1495" height="96"/>
+	<SubTexture name="press enter0042" x="0" y="1999" width="1495" height="96"/>
+	<SubTexture name="press enter0043" x="1495" y="1999" width="1495" height="96"/>
+	<SubTexture name="press enter0044" x="0" y="79" width="1495" height="96"/>
+</TextureAtlas>

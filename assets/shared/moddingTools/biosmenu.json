@@ -28,11 +28,11 @@
 		"bios/badge1"
 	],
 	"imageLinks": [
-		"bios/mainDevs/daricrahdev",
-		"bios/noBiosImg",
-		"bios/mainDevs/foxloid",
-		"bios/mainDevs/dataurenado",
-		"bios/mainDevs/barbaraOficial"
+		"credits/bios/mainDevs/daricrahdev",
+		"credits/bios/noBiosImg",
+		"credits/bios/mainDevs/foxloid",
+		"credits/bios/mainDevs/dataurenado",
+		"credits/bios/mainDevs/barbaraOficial"
 	],
 	"badgeText": [
 		"Main Programmer",

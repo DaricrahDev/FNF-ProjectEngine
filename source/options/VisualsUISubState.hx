@@ -152,6 +152,12 @@ class VisualsUISubState extends BaseOptionsMenu
 			'bool');
 		addOption(option);
 
+		var option:Option = new Option('Watermark',
+			"If checked, enables Project Engine's watermark.",
+			'enableWatermark',
+			'bool');
+		addOption(option);
+
 		super();
 		add(notes);
 	}

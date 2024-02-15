@@ -40,14 +40,6 @@ class BiosMenuState extends MusicBeatState {
 	var background:FlxSprite;
     var imageSprite:FlxSprite;
 
-    var imagePath:Array<String>;
-    var charDesc:Array<String>;
-    var charName:Array<String>;
-	var linkOpen:Array<String>;
-	var badgeimg:Array<String>;
-	var badgeText:Array<String>;
-	var peopleLinks:Array<String>;
-
 	var curSelected:Int = -1;
 	var currentIndex:Int = 0;
 
@@ -81,7 +73,6 @@ class BiosMenuState extends MusicBeatState {
 		background.color = CoolUtil.colorFromString(biosJSON.backgroundColor[currentIndex]);
         add(background);
 
-		// i took this from psych's engine code lol
 		var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33000000, 0x0));
 		grid.velocity.set(30, 30);
 		grid.alpha = 0;
@@ -111,7 +102,7 @@ class BiosMenuState extends MusicBeatState {
 		descriptionText.borderSize = 2.5;
         add(descriptionText);
 
-		var arrows = new FlxSprite(218, 30).loadGraphic(Paths.image('bios/assets/biosThing'));
+		var arrows = new FlxSprite(218, 30).loadGraphic(Paths.image('credits/bios/assets/biosThing'));
 		add(arrows);
 
 		super.create();
@@ -119,11 +110,12 @@ class BiosMenuState extends MusicBeatState {
 
 	override function update(elapsed:Float) {
 
-		if (controls.ACCEPT) {
+		if (controls.ACCEPT) 
+		{
 			CoolUtil.browserLoad(biosJSON.links[currentIndex]);
 		}
 
-		if (FlxG.keys.justPressed.UP || FlxG.keys.justPressed.W) 
+		if (controls.UI_UP_P) 
 			{
 				currentIndex--;
 				if (currentIndex < 0)
@@ -144,7 +136,7 @@ class BiosMenuState extends MusicBeatState {
 				FlxG.sound.play(Paths.sound('scrollMenu'));  
 	
 			}
-			else if (FlxG.keys.justPressed.DOWN || FlxG.keys.justPressed.S)
+			else if (controls.UI_DOWN_P)
 			{
 				currentIndex++;
 				if (currentIndex >= biosJSON.imageLinks.length)
@@ -165,10 +157,10 @@ class BiosMenuState extends MusicBeatState {
 				FlxG.sound.play(Paths.sound('scrollMenu'));	
 			}
 			if (controls.BACK)
-				{
-					FlxG.sound.play(Paths.sound('cancelMenu'));
-					MusicBeatState.switchState(new MainMenuState());
-				}
+			{
+				FlxG.sound.play(Paths.sound('cancelMenu'));
+				MusicBeatState.switchState(new MainMenuState());
+			}
 		
 		super.update(elapsed);
 }	}

@@ -327,7 +327,7 @@ class TitleState extends MusicBeatState
 			
 			titleText.animation.play('idle');
 			titleText.updateHitbox();
-			// titleText.screenCenter(X);
+			titleText.screenCenter(X);
 			add(titleText);
 		}
 		// logoBl.screenCenter();
@@ -616,7 +616,7 @@ class TitleState extends MusicBeatState
 			{
 				case 1:
 					//FlxG.sound.music.stop();
-					FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
+					FlxG.sound.playMusic(Paths.music('freakyMenu'), 1);
 					FlxG.sound.music.fadeIn(4, 0, 0.7);
 				case 2:
 					createCoolText(titleEditor.firstTitleTxt);
@@ -625,10 +625,10 @@ class TitleState extends MusicBeatState
 				case 5:
 					deleteCoolText();
 				case 6:
-					createCoolText(['Project Engine', 'By'], -40);
+					createCoolText(['Developed By']);
 				case 8:
-					addMoreText('Project Team', -40);
-					ngSpr.visible = true;
+					addMoreText('Project Team');
+					//ngSpr.visible = true;
 				case 9:
 					deleteCoolText();
 					ngSpr.visible = false;

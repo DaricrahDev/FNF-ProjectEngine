@@ -8,9 +8,9 @@ import states.TitleState;
 
 // Add a variable here and it will get automatically saved
 @:structInit class SaveVariables {
+	public var timeBarType:String = 'Time Left';
+	public var enablefreeplayChars:Bool = true;
 	public var randomMessage:Bool = true;
-	public var menuTweens:Bool = true;
-	public var menuEditor:Bool = true;
 	public var none:String = '';
 	public var language:String = 'English';
 	public var downScroll:Bool = false;
@@ -42,7 +42,6 @@ import states.TitleState;
 		[0xFFFF884E, 0xFFFFFAF5, 0xFF6C0000]];
 
 	public var ghostTapping:Bool = true;
-	public var timeBarType:String = 'Time Left';
 	public var scoreZoom:Bool = true;
 	public var noReset:Bool = false;
 	public var healthBarAlpha:Float = 1;
@@ -80,12 +79,13 @@ import states.TitleState;
 	public var safeFrames:Float = 10;
 	public var guitarHeroSustains:Bool = true;
 	public var discordRPC:Bool = true;
+	public var enableWatermark:Bool = true;
 }
 
 class ClientPrefs {
+	public static var enableWatermark:Bool = true;
+	public static var enablefreeplayChars:Bool = true;
 	public static var randomMessage:Bool = true;
-	public static var menuTweens:Bool = true;
-	public static var menuEditor:Bool = true;
 	public static var none:String = '';
 	public static var language:String = 'English';
 	public static var data:SaveVariables = {};

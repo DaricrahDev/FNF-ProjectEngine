@@ -1,5 +1,6 @@
 package states.editors;
 
+import flixel.addons.display.FlxBackdrop;
 import flash.geom.Rectangle;
 import haxe.Json;
 import haxe.format.JsonParser;
@@ -187,6 +188,9 @@ class ChartingState extends MusicBeatState
 	var text:String = "";
 	public static var vortex:Bool = false;
 	public var mouseQuant:Bool = false;
+
+	var authorInput:FlxUIInputText;
+
 	override function create()
 	{
 		if (PlayState.SONG != null)
@@ -221,9 +225,17 @@ class ChartingState extends MusicBeatState
 		ignoreWarnings = FlxG.save.data.ignoreWarnings;
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.antialiasing = ClientPrefs.data.antialiasing;
+		bg.screenCenter();
 		bg.scrollFactor.set();
-		bg.color = 0xFF222222;
+		bg.color = FlxColor.fromRGB(PlayState.dadHealthColor1, PlayState.dadHealthColor2, PlayState.dadHealthColor3);
 		add(bg);
+
+		var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33000000, 0x0));
+		grid.velocity.set(30, 30);
+		grid.scale.set(1.3, 1.3);
+		grid.alpha = 0;
+		FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+		add(grid);
 
 		gridLayer = new FlxTypedGroup<FlxSprite>();
 		add(gridLayer);
@@ -272,6 +284,8 @@ class ChartingState extends MusicBeatState
 		if(curSec >= _song.notes.length) curSec = _song.notes.length - 1;
 
 		bpmTxt = new FlxText(1000, 50, 0, "", 16);
+		bpmTxt.font = Paths.font('vcr.ttf');
+		bpmTxt.setBorderStyle(OUTLINE, FlxColor.BLACK, 1);
 		bpmTxt.scrollFactor.set();
 		add(bpmTxt);
 
@@ -340,9 +354,9 @@ class ChartingState extends MusicBeatState
 
 		var tipTextArray:Array<String> = text.split('\n');
 		for (i in 0...tipTextArray.length) {
-			var tipText:FlxText = new FlxText(UI_box.x, UI_box.y + UI_box.height + 8, 0, tipTextArray[i], 16);
+			var tipText:FlxText = new FlxText(UI_box.x + 12, UI_box.y + UI_box.height + 8, 0, tipTextArray[i], 16);
 			tipText.y += i * 12;
-			tipText.setFormat(Paths.font("vcr.ttf"), 14, FlxColor.WHITE, LEFT/*, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK*/);
+			tipText.setFormat(Paths.font("vcr.ttf"), 14, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 			//tipText.borderSize = 2;
 			tipText.scrollFactor.set();
 			add(tipText);
@@ -493,7 +507,7 @@ class ChartingState extends MusicBeatState
 		for (character in characters)
 		{
 			if(character.trim().length > 0)
-				tempArray.push(character);
+				tempArray.insert(0, character);
 		}
 
 		#if MODS_ALLOWED
@@ -582,6 +596,12 @@ class ChartingState extends MusicBeatState
 		stageDropDown.selectedLabel = _song.stage;
 		blockPressWhileScrolling.push(stageDropDown);
 
+		authorInput = new FlxUIInputText(stageDropDown.x, stageDropDown.y + 42.5, 100, "");
+		blockPressWhileTypingOn.push(authorInput);
+
+		var authorTxt = new FlxText(authorInput.x, authorInput.y - 15.2, "Song Author");
+		authorTxt.size = 5;
+
 		var tab_group_song = new FlxUI(null, UI_box);
 		tab_group_song.name = "Song";
 		tab_group_song.add(UI_songTitle);
@@ -592,6 +612,8 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(saveButton);
 		tab_group_song.add(saveEvents);
 		tab_group_song.add(reloadSong);
+		tab_group_song.add(authorInput);
+		tab_group_song.add(authorTxt);
 		tab_group_song.add(reloadSongJson);
 		tab_group_song.add(loadAutosaveBtn);
 		tab_group_song.add(loadEventJson);

@@ -255,7 +255,7 @@ class Paths
 			if(retVal != null) return retVal;
 		}
 
-		trace('oh no its returning null NOOOO ($file)');
+		trace('image not found ($file)');
 		return null;
 	}
 

@@ -1,14 +1,20 @@
 {
-	"creditsType": "Bios",
-	"oneshotSongName": "Bopeebo",
-	"backgroundColor": "0xff7e0097",
-	"backgroundSpr": "menuDesat",
-	"checkersEnabled": true,
-	"randomMessage": [
-	"Welcome to PE v0.7.2!",
-	"Try the new Menu Editor by pressing TAB", 
-	"Take a look to the new options menu design!",
-	"Fun fact: Psych's version is 0.7.2, same with Project Engine",
-	"Stage Editor is never going to be released. /j"
-	]	
+	"bgSpr": "menuDesat",
+	"bgColor": "0xff7e0097",
+	"bgFlickColor": "0xFFfd719b",
+	"creditsType": "Credits",
+	"oneshotSong": "Bopeebo",
+	"creditsArrowPath": "mic-d-up/credits",
+	"modsArrowPath": "mic-d-up/mods",
+	"randomMessages": 
+	[
+		"Project Engine v0.7.2 full release! Finally.",
+		"You can customize your gameplay on options/preferences",
+		"Try the new Menu Editor by pressing 7!",
+		"Leave a like on gamebanana if you like the engine!",
+		"Report bugs at https://discord.gg/PNcTpUTcKS"
+	],
+	"bgFlick": false,
+	"checkersOn": true,
+	"arrowsOn": true
 }

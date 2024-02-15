@@ -1,5 +1,6 @@
 package states;
 
+import openfl.display.Application;
 import backend.Highscore;
 import backend.StageData;
 import backend.WeekData;
@@ -20,6 +21,7 @@ import lime.utils.Assets;
 import openfl.utils.Assets as OpenFlAssets;
 import openfl.events.KeyboardEvent;
 import haxe.Json;
+import openfl.net.FileReference;
 
 import cutscenes.CutsceneHandler;
 import cutscenes.DialogueBoxPsych;
@@ -175,7 +177,6 @@ class PlayState extends MusicBeatState
 
 	public var gfSpeed:Int = 1;
 	public var health(default, set):Float = 1;
-	private var curHealth:Float = 1;
 	public var combo:Int = 0;
 
 	public var healthBar:Bar;
@@ -252,7 +253,7 @@ class PlayState extends MusicBeatState
 	public static var instance:PlayState;
 	public var luaArray:Array<FunkinLua> = [];
 	#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
-	private var luaDebugGroup:FlxTypedGroup<psychlua.DebugLuaText>;
+	private var luaDebugGroup:FlxTypedGroup<DebugLuaText>;
 	#end
 	public var introSoundsSuffix:String = '';
 
@@ -265,6 +266,16 @@ class PlayState extends MusicBeatState
 	// Callbacks for stages
 	public var startCallback:Void->Void = null;
 	public var endCallback:Void->Void = null;
+
+	// smooth healthbar thingy
+	private var curHealth:Float = 1;
+
+	public static var dadHealthColor1:FlxColor;
+	public static var dadHealthColor2:FlxColor;
+	public static var dadHealthColor3:FlxColor;
+
+	var msTimeTxt:FlxText;
+	var msTimeTxtTween:FlxTween;
 
 	override public function create()
 	{
@@ -330,7 +341,7 @@ class PlayState extends MusicBeatState
 			detailsText = "Freeplay";
 
 		// String for when the game is paused
-		detailsPausedText = "(Paused) - " + detailsText;
+		detailsPausedText = "Paused - " + detailsText;
 		#end
 
 		GameOverSubstate.resetVariables();
@@ -479,9 +490,9 @@ class PlayState extends MusicBeatState
 		timeTxt.borderSize = 2;
 		timeTxt.visible = updateTime = showTime;
 		if(ClientPrefs.data.downScroll) timeTxt.y = FlxG.height - 44;
-		if(ClientPrefs.data.timeBarType == 'Song Name') timeTxt.text = SONG.song;
+		if(ClientPrefs.data.timeBarType == 'Song Name') timeTxt.text = SONG.song + ' - (${storyDifficultyText.toUpperCase()})';
 
-		timeBar = new Bar(0, timeTxt.y + (timeTxt.height / 4), 'timeBar', function() return songPercent, 0, 1);
+		timeBar = new Bar(0, timeTxt.y + (timeTxt.height / 4), 'timeBar_large', function() return songPercent, 0, 1);
 		timeBar.scrollFactor.set();
 		timeBar.screenCenter(X);
 		timeBar.alpha = 0;
@@ -489,14 +500,32 @@ class PlayState extends MusicBeatState
 		uiGroup.add(timeBar);
 		uiGroup.add(timeTxt);
 
-		strumLineNotes = new FlxTypedGroup<StrumNote>();
-		noteGroup.add(strumLineNotes);
+		timeBar.setPosition(115, 20);
+		timeTxt.setPosition(435, 13);
+		timeBar.setColors(FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]), 0xFF000000);
 
 		if(ClientPrefs.data.timeBarType == 'Song Name')
 		{
 			timeTxt.size = 24;
 			timeTxt.y += 3;
 		}
+
+		dadHealthColor1 = dad.healthColorArray[0];
+		dadHealthColor2 = dad.healthColorArray[1];
+		dadHealthColor3 = dad.healthColorArray[2];
+
+		msTimeTxt = new FlxText(0, 0, 400, "", 32);
+		msTimeTxt.setFormat(Paths.font('vcr.ttf'), 32, 0xFF666666, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		msTimeTxt.scrollFactor.set();
+		msTimeTxt.alpha = 0;
+		msTimeTxt.visible = true;
+		msTimeTxt.borderSize = 2;
+		uiGroup.add(msTimeTxt);
+
+		strumLineNotes = new FlxTypedGroup<StrumNote>();
+		noteGroup.add(strumLineNotes);
+
+		lime.app.Application.current.window.title = 'Project Engine - ' + SONG.song + ' (' + storyDifficultyText.toUpperCase() + ')';
 
 		var splash:NoteSplash = new NoteSplash(100, 100);
 		grpNoteSplashes.add(splash);
@@ -555,6 +584,19 @@ class PlayState extends MusicBeatState
 		scoreTxt.visible = !ClientPrefs.data.hideHud;
 		updateScore(false);
 		uiGroup.add(scoreTxt);
+
+		var watermark:FlxText = new FlxText(4, healthBar.y + 50, 0, SONG.song + ' (${storyDifficultyText})' + ' - ${lime.app.Application.current.meta.get('company')}');
+		watermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, OUTLINE, FlxColor.BLACK);
+		watermark.scrollFactor.set();
+		watermark.visible = ClientPrefs.data.enableWatermark;
+		uiGroup.add(watermark);
+
+		if (SONG.song.toLowerCase() == 'senpai' || SONG.song.toLowerCase() == 'roses' || SONG.song.toLowerCase() == 'thorns')
+		{
+			timeTxt.font = Paths.font("pixel.otf");
+			scoreTxt.setFormat(Paths.font("pixel.otf"), 15, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			watermark.font = Paths.font('pixel.otf');
+		}
 
 		botplayTxt = new FlxText(400, timeBar.y + 55, FlxG.width - 800, "BOTPLAY", 32);
 		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -649,6 +691,7 @@ class PlayState extends MusicBeatState
 
 		CustomFadeTransition.nextCamera = camOther;
 		if(eventNotes.length < 1) checkEventNote();
+
 	}
 
 	function set_songSpeed(value:Float):Float
@@ -712,7 +755,7 @@ class PlayState extends MusicBeatState
 
 	public function reloadHealthBarColors() {
 		healthBar.setColors(FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]),
-		FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]));
+			FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]));
 	}
 
 	public function addCharacterToList(newCharacter:String, type:Int) {
@@ -956,6 +999,45 @@ class PlayState extends MusicBeatState
 			return false;
 		}
 
+		var cube:FlxSprite = new FlxSprite(-378, 52).makeGraphic(371, 137, FlxColor.BLACK);
+		cube.alpha = 0.5;
+		cube.scrollFactor.set();
+		uiGroup.add(cube);
+
+		var nowPlaying:FlxText = new FlxText(-359, 58, 334, "Now playing...");
+		nowPlaying.setFormat(Paths.font('vcr.ttf'), 27, FlxColor.WHITE, LEFT, OUTLINE, FlxColor.BLACK);
+		nowPlaying.borderSize = 2.5;
+		nowPlaying.scrollFactor.set();
+		uiGroup.add(nowPlaying);
+
+		var songText:FlxText = new FlxText(-359, 115, 334, SONG.song + " - " + Difficulty.getString());
+		songText.setFormat(Paths.font('vcr.ttf'), 25, FlxColor.WHITE, CENTER, OUTLINE, FlxColor.BLACK);
+		songText.borderSize = 2.5;
+		songText.scrollFactor.set();
+		uiGroup.add(songText);
+
+		FlxTween.tween(cube, {x: 0.85, y: 52}, 1.5, {ease: FlxEase.cubeInOut, startDelay: 2.5, onComplete: function(_) {
+			new FlxTimer().start(2.0, function(_) {
+				FlxTween.tween(cube, {x: -378, y: 52}, 1.5, {ease: FlxEase.cubeOut});
+			});
+		}});
+		FlxTween.tween(nowPlaying, {x: 18, y: 58}, 1.5, {ease: FlxEase.cubeInOut, startDelay: 2.5, onComplete: function(_) {
+			new FlxTimer().start(2.0, function(_) {
+				FlxTween.tween(nowPlaying, {x: -359, y: 58}, 1.5, {ease: FlxEase.cubeOut});
+			});
+		}});
+		FlxTween.tween(songText, {x: 18, y: 115}, 1.5, {ease: FlxEase.cubeInOut, startDelay: 2.5, onComplete: function(_) {
+			new FlxTimer().start(2.0, function(_) {
+				FlxTween.tween(songText, {x: -359, y: 115}, 1.5, {ease: FlxEase.cubeOut});
+			});
+		}});
+
+		if (SONG.song.toLowerCase() == 'senpai' || SONG.song.toLowerCase() == 'roses' || SONG.song.toLowerCase() == 'thorns')
+		{
+			songText.font = Paths.font('pixel.otf');
+			nowPlaying.font = Paths.font('pixel.otf');
+		}
+
 		seenCutscene = true;
 		inCutscene = false;
 		var ret:Dynamic = callOnScripts('onStartCountdown', null, true);
@@ -978,6 +1060,19 @@ class PlayState extends MusicBeatState
 			Conductor.songPosition = -Conductor.crochet * 5;
 			setOnScripts('startedCountdown', true);
 			callOnScripts('onCountdownStarted', null);
+
+			if (ClientPrefs.data.downScroll) {
+				msTimeTxt.x = playerStrums.members[1].x-100;
+				msTimeTxt.y = playerStrums.members[1].y+100;
+			} else {
+				msTimeTxt.x = playerStrums.members[1].x-100;
+				msTimeTxt.y = playerStrums.members[1].y-50;
+			}
+
+			if (ClientPrefs.data.middleScroll) {
+				msTimeTxt.x = playerStrums.members[0].x-250;
+				msTimeTxt.y = playerStrums.members[1].y+30;
+			}
 
 			var swagCounter:Int = 0;
 			if (startOnTime > 0) {
@@ -2356,7 +2451,7 @@ class PlayState extends MusicBeatState
 					if(FlxTransitionableState.skipNextTransIn) {
 						CustomFadeTransition.nextCamera = null;
 					}
-					MusicBeatState.switchState(new StoryMenuState());
+					openSubState(new states.ResultsScreen());
 
 					// if ()
 					if(!ClientPrefs.getGameplaySetting('practice') && !ClientPrefs.getGameplaySetting('botplay')) {
@@ -2396,8 +2491,8 @@ class PlayState extends MusicBeatState
 				if(FlxTransitionableState.skipNextTransIn) {
 					CustomFadeTransition.nextCamera = null;
 				}
-				MusicBeatState.switchState(new FreeplayState());
-				FlxG.sound.playMusic(Paths.music('freakyMenu'));
+				openSubState(new states.ResultsScreen());
+				//FlxG.sound.playMusic(Paths.music('freakyMenu'));
 				changedDifficulty = false;
 			}
 			transitioning = true;
@@ -2458,11 +2553,22 @@ class PlayState extends MusicBeatState
 			}
 		}
 
+		var comboString:String = Std.string(combo);
+		var stringArray:Array<String> = comboString.split("");
+
+		msTimeTxt.alpha = 1;
+		msTimeTxt.text =Std.string(Math.round(noteDiff)) + "ms";
+		if (msTimeTxtTween != null){
+			msTimeTxtTween.cancel(); msTimeTxtTween.destroy(); // top 10 awesome code
+		}
+		msTimeTxtTween = FlxTween.tween(msTimeTxt, {alpha: 0}, 0.25, {
+			onComplete: function(tw:FlxTween) {msTimeTxtTween = null;}, startDelay: 0.7
+		});
+
 		var placement:Float = FlxG.width * 0.35;
 		var rating:FlxSprite = new FlxSprite();
 		var score:Int = 350;
 
-		//tryna do MS based judgment due to popular demand
 		var daRating:Rating = Conductor.judgeNote(ratingsData, noteDiff / playbackRate);
 
 		totalNotesHit += daRating.ratingMod;
@@ -2470,6 +2576,31 @@ class PlayState extends MusicBeatState
 		if(!note.ratingDisabled) daRating.hits++;
 		note.rating = daRating.name;
 		score = daRating.score;
+
+		if (daRating.name == "perfect")
+		{
+			msTimeTxt.color = 0xFF46FFA3;
+		}
+		if (daRating.name == "sick")
+		{
+			msTimeTxt.color = 0xFF46FF46;
+		}
+		if (daRating.name == "good")
+		{
+			msTimeTxt.color = 0xFF46D4FF;
+		}
+		if (daRating.name == "bad")
+		{
+			msTimeTxt.color = 0xFFFF4646;
+		}
+		if (daRating.name == "shit")
+		{
+			msTimeTxt.color = 0xFF5E1C1C;
+		}
+		if (daRating.name == "miss")
+		{
+			msTimeTxt.color = 0xFF2E0E0E;
+		}
 
 		if(daRating.noteSplash && !note.noteSplashData.disabled)
 			spawnNoteSplashOnNote(note);
@@ -2518,6 +2649,9 @@ class PlayState extends MusicBeatState
 		comboSpr.antialiasing = antialias;
 		comboSpr.y += 60;
 		comboSpr.velocity.x += FlxG.random.int(1, 10) * playbackRate;
+
+		msTimeTxt.setPosition(comboSpr.x, comboSpr.y);
+
 		comboGroup.add(rating);
 
 		if (!PlayState.isPixelStage)
@@ -2545,12 +2679,12 @@ class PlayState extends MusicBeatState
 
 		var daLoop:Int = 0;
 		var xThing:Float = 0;
-		if (showCombo)
-			comboGroup.add(comboSpr);
+		
+		comboGroup.add(comboSpr);
 
-		for (i in seperatedScore)
+		for (i in 0...stringArray.length)
 		{
-			var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image(uiPrefix + 'num' + Std.int(i) + uiSuffix));
+			var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image(uiPrefix + 'num' + stringArray[i] + uiSuffix));
 			numScore.screenCenter();
 			numScore.x = placement + (43 * daLoop) - 90 + ClientPrefs.data.comboOffset[2];
 			numScore.y += 80 - ClientPrefs.data.comboOffset[3];
