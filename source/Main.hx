@@ -1,9 +1,5 @@
 package;
 
-#if android
-import android.content.Context;
-#end
-
 import debug.FPSCounter;
 
 import flixel.graphics.FlxGraphic;
@@ -17,6 +13,7 @@ import openfl.events.Event;
 import openfl.display.StageScaleMode;
 import lime.app.Application;
 import states.TitleState;
+import backend.SUtil;
 
 #if linux
 import lime.graphics.Image;
@@ -28,7 +25,9 @@ import openfl.events.UncaughtErrorEvent;
 import haxe.CallStack;
 import haxe.io.Path;
 #end
-
+#if hl
+import hl.Api;
+#end
 #if linux
 @:cppInclude('./external/gamemode_client.h')
 @:cppFileCode('
@@ -60,12 +59,28 @@ class Main extends Sprite
 	public function new()
 	{
 		super();
+		#if mobile
+		var path = #if android Path.addTrailingSlash(SUtil.getStorageDirectory()) #else SUtil.getStorageDirectory() #end;
+		Sys.setCwd(path);
+		#end
 
-		// Credits to MAJigsaw77 (he's the og author for this code)
-		#if android
-		Sys.setCwd(Path.addTrailingSlash(Context.getExternalFilesDir()));
-		#elseif ios
-		Sys.setCwd(lime.system.System.applicationStorageDirectory);
+		SUtil.uncaughtErrorHandler();
+
+		#if windows
+		@:functionCode("
+		#include <windows.h>
+		#include <winuser.h>
+		setProcessDPIAware() // allows for more crisp visuals
+		DisableProcessWindowsGhosting() // lets you move the window and such if it's not responding
+		")
+		#end
+
+		#if cpp
+		@:privateAccess
+		untyped __global__.__hxcpp_set_critical_error_handler(SUtil.onError);
+		#elseif hl
+		@:privateAccess
+		Api.setErrorHandler(SUtil.onError);
 		#end
 
 		if (stage != null)
